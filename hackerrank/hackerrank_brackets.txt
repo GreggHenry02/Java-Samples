@@ -1,0 +1,65 @@
+/*
+ * Complete the function below.
+ */
+
+    static String[] Braces(String[] values) {
+        String result[] = new String[values.length];
+        for (int i=0;i<values.length;i++) {
+            System.out.println(i + "  -----------");
+            if (checkBalance(values[i]+"  "))
+                result[i]="YES";
+            else
+                result[i]="NO";
+        }               
+        return result;
+    }
+
+    static boolean checkBalance(String braces) {
+        //System.out.println("x" + braces);
+        // For braces to be balanced, any innermost set of brackets must be a pair.
+        if (braces.length() == 0 || braces.compareTo("  ")==0) return true;
+        if (braces.charAt(0) == ']' || braces.charAt(0) == '}' || braces.charAt(0) == ')') return false;
+        for (int i=1;i<braces.length();i++) {                
+            // FIXME DEBUG
+            //System.out.println(i + " X " + braces.charAt(i) );
+                switch (braces.charAt(i)) {
+                    case '[':
+                    case '{':
+                    case '(': break;
+                    case ']': if (braces.charAt(i-1) == '[') {                        
+                        String newString= braces.substring(0, i-1) + braces.substring(i+1,braces.length());
+                        // FIXME DEBUG
+                        System.out.println(">>"+newString);
+                        return checkBalance(newString);
+                    } else {
+                        return false; 
+                    }
+                    case '}': if (braces.charAt(i-1) == '{') {                        
+                        String newString= braces.substring(0, i-1) + braces.substring(i+1,braces.length());
+                        // FIXME DEBUG
+                        System.out.println(">>"+newString);
+                        return checkBalance(newString);
+                    } else {
+                        return false; 
+                    }
+                    case ')': if (braces.charAt(i-1) == '(') {                        
+                        String newString= braces.substring(0, i-1) + braces.substring(i+1,braces.length());
+                        // FIXME DEBUG
+                        System.out.println(">>"+newString);
+                        return checkBalance(newString);
+                    } else {
+                        return false; 
+                    }
+                    default: return false;                    
+                } 
+            }
+        return true;
+    }
+
+/* Test Cases
+{{[]}}
+({[({[]})]})
+()({}{})
+[][][
+
+*/

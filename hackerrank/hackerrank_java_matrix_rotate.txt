@@ -1,0 +1,137 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    int m,n,r;
+    int[][] array;
+    
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */      Solution s = new Solution();
+    }
+    
+    Solution() {
+        Scanner in = new Scanner(System.in);
+        m = in.nextInt(); // Y value
+        n = in.nextInt(); // X value
+        r = in.nextInt();
+        
+        array=new int[m][n];
+        //System.out.printf("%d %d %d\n",m,n,r);
+        int x,y;
+        for (y=0;y<m;y++) {
+            for (x=0;x<n;x++) {
+                array[y][x] = in.nextInt();
+            }
+        }
+        
+        Vector<Integer> ring;
+        //printArray();
+        int i;
+        int rings=(Math.min(m,n))/2;
+        // FIXME - test for oblongs
+        for (i=0;i<rings;i++) {
+            ring = makeVector(i);
+            //printVector(ring);
+            ring = rotateVector(r,ring);            
+            //printVector(ring);            
+            applyVectorToMatrix(i,ring);
+        }
+        printArray();
+        
+    }
+    
+    private Vector<Integer> makeVector(int index) {
+        Vector<Integer> ring = new Vector<Integer>();      
+        int vert_start=index;
+        int vert_end=m-index-1; // Array is zero indexed
+        int horz_start=index;
+        int horz_end=n-index-1; // Array is zero indexed, both axis
+        // Start top right, go down, go right, go up, go left        
+        int x,y;
+        // LHS down
+        for (y=vert_start;y<vert_end;y++) 
+            ring.add(array[y][horz_start]);
+        // Bottom
+        for (x=horz_start;x<horz_end;x++) 
+            ring.add(array[vert_end][x]);        
+        // RHS up
+        for (y=vert_end;y>vert_start;y--) 
+            ring.add(array[y][horz_end]);
+        // Top
+        for (x=horz_end;x>horz_start;x--) 
+            ring.add(array[vert_start][x]);        
+        return ring;        
+    }
+
+    private Vector<Integer> rotateVector(int rotate, Vector<Integer> work) {        
+        int i;
+        /* - Rotates Clockwise
+        for (i=0;i<rotate;i++)
+            work.add(work.get(i) );                
+        for (i=0;i<rotate;i++)
+            work.remove(0);        
+        */
+        int size=work.size();
+        int mod_rotate = rotate % size;
+        size--; // Zero index        
+        for (i=0;i<mod_rotate;i++) {
+            work.insertElementAt(work.get(size),0);
+            work.remove(size+1);
+        }
+                    
+        return work;        
+    }
+    
+    private void printVector(Vector<Integer> work) {    
+        System.out.println("");
+        for (int v : work) {
+            System.out.print(v + " ");
+        }
+        System.out.println("\n");
+        System.out.println("");       
+    }
+    
+    private void applyVectorToMatrix(int index,Vector<Integer> ring) {               
+        int vert_start=index;
+        int vert_end=m-index-1; // Array is zero indexed
+        int horz_start=index;
+        int horz_end=n-index-1; // Array is zero indexed, both axis
+        // Start top right, go down, go right, go up, go left        
+        int x,y;
+        // LHS down
+        for (y=vert_start;y<vert_end;y++) {            
+            array[y][horz_start]=ring.get(0);
+            ring.remove(0);
+        }
+        // Bottom
+        for (x=horz_start;x<horz_end;x++) {
+            array[vert_end][x]=ring.get(0);
+            ring.remove(0);
+        }
+        // RHS up
+        for (y=vert_end;y>vert_start;y--) { 
+            array[y][horz_end]=ring.get(0);
+            ring.remove(0);
+        }    
+        // Top
+        for (x=horz_end;x>horz_start;x--) {
+            array[vert_start][x]=ring.get(0);
+            ring.remove(0);
+        }
+        
+    }    
+    
+    private void printArray() {
+        int i,j;
+        for (i=0;i<m;i++) {
+            for (j=0;j<n;j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.print("\n");
+        }            
+    }
+}

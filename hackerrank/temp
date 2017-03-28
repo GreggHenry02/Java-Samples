@@ -1,0 +1,77 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    int n;
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */  
+        Solution s = new Solution();
+    }
+    
+    Solution() {
+        Scanner in = new Scanner(System.in);        
+        n = in.nextInt(); // X value
+        List<String> list = new ArrayList<String>();
+        int i;
+        for (i=0;i<n;i++) {
+            list.add(in.next());
+            //System.out.println(distinctCount( list.get(i) ));
+            //% 1000000007
+        }     
+        int j;
+        int sum;
+        String current;
+        String sub_current;
+        List<String> distinct_subs;
+        // Need to make a list of all distinct substrings
+        for (i=0;i<list.size();i++) {
+            current = list.get(i);
+            sum = 0;
+            distinct_subs = getDistinctSubs(current);
+            /*
+            for (j=0;j<distinct_subs.length();j++) {
+                sub_current=distinct_subs.get(j);                
+                sum+=(sub_current.length() * distinctCount(sub_current)) % 1000000007;
+            }
+            */
+            System.out.println(current + "   " + sum);
+        }
+    }
+    
+    int distinctCount(String work) {
+        int result=0;
+        int[] char_oc = new int[256];
+        int i;
+        for (i=0;i<work.length();i++) {
+            char_oc[work.charAt(i)]++;
+        }
+        for (i=0;i<128;i++) {
+            if (char_oc[i] > 0)
+                result++;
+        }
+        return result;
+    }
+
+    List<String> genDistinctSubstrings(String work) {
+        //int result=0;
+        List<String> result = new ArrayList<String>();
+        int i,j;
+        int ssl;
+        int pos;
+        for (ssl=1;ssl<=work.length();ssl++) {
+            for (pos=0;pos<work.length()-ssl+1;pos++) {
+                System.out.println(work.sub);
+            }
+        }
+        
+        
+        
+        return result;
+    }
+
+    
+}
+

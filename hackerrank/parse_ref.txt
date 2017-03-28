@@ -1,0 +1,18 @@
+
+Parsing Integers in a string such that 'String number = "1 2 3 4 5"'
+	You can use a Scanner to read the string one integer at a time.
+
+	Scanner scanner = new Scanner(number);
+	List<Integer> list = new ArrayList<Integer>();
+	while (scanner.hasNextInt()) {
+		list.add(scanner.nextInt());
+	}
+
+Parsing by field
+	ArrayList<Integer> lst = new ArrayList<Integer>();
+	for (String field : number.split(" +"))
+		lst.add(Integer.parseInt(field));
+
+
+
+

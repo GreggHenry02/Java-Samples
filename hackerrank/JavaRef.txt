@@ -1,0 +1,34 @@
+Java Primer and Reference
+
+
+Line input
+        String str = new String("blank");
+        System.out.println("lineout");
+        try {
+            InputStreamReader in = new InputStreamReader(System.in);
+            BufferedReader input = new BufferedReader(in);
+            str = input.readLine();
+
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+		
+		
+Sorting a list
+	Collections.sort(testList);
+	Collections.reverse(testList);
+
+Java regex and words
+	\s matches white space
+	\s+ matches 1+ whitespace characters.
+
+
+	You can't have an array of lists - unless they are wildcards. You can not
+	have an array of parameterized types. You can have a list though, which
+	could be helpful.
+	http://stackoverflow.com/questions/5662394/java-1-6-creating-an-array-of-listt
+	http://docs.oracle.com/javase/tutorial/extra/generics/fineprint.html
+	
+	TODO - Make note, command line java only counts the arguments passed in, program name
+	is no longer argument 
+

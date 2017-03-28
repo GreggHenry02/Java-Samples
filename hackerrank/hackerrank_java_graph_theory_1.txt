@@ -1,0 +1,87 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    int nodes;        
+    int edges;
+    int generation;
+    int[] edgeA;
+    int[] edgeB;
+    int[] d_start;
+    
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */      Solution s = new Solution();
+    }
+    
+    Solution() {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        int i;
+        for(int a0 = 0; a0 < t; a0++){
+            nodes = in.nextInt();        
+            edges = in.nextInt();
+            edgeA = new int[edges];
+            edgeB = new int[edges];            
+            for (i=0;i<edges;i++) {
+                edgeA[i] = in.nextInt();        
+                edgeB[i] = in.nextInt();                
+            }
+            int start = in.nextInt();
+            //System.out.printf("nodes=%d  edges=%d  start=%d\n",nodes,edges,start);
+            // Output, space deliniated list of integers representing distance from start node to each other node.
+            // each edge of the graph is 6 units because reasons?
+            // unreachable nodes are to be reported as -1
+            generation=0;
+            // Nodes are 1 indexed
+            d_start = new int[nodes+1];
+            for (i=0;i<nodes+1;i++) {
+                d_start[i]=-1;
+            }            
+            d_start[start]=0; // start is 0 distance from itself;
+            for (generation=0;generation<=nodes;generation++) {
+                for (i=1;i<=nodes;i++) {
+                    if (d_start[i] == generation) {
+                        checkEdges(i);
+                    }                  
+                }
+            }           
+            showDistance();
+        }
+    }
+
+    private void checkEdges(int node) {
+        int j;
+        for (j=0;j<edges;j++) {
+            checkEdge(node, edgeA[j],edgeB[j]);
+        }
+    }
+    
+    private void checkEdge(int node, int e1, int e2) {
+        if (e1 == node) {
+            if (d_start[e2] == -1)
+                d_start[e2] = generation+1;
+        } else if (e2 == node) {
+            if (d_start[e1] == -1) 
+                d_start[e1] = generation+1;
+        }
+    }
+    
+    private void showDistance() {
+        int i;
+        for (i=1;i<=nodes;i++) {
+            if (d_start[i] == 0) {
+                // Don't print the start node.   
+            } else if (d_start[i] == -1) {
+                System.out.print(d_start[i] + " ");
+            } else if (d_start[i] >= 1) {
+                System.out.print(d_start[i]*6 + " ");
+            }                
+        }
+        System.out.println();
+    }
+        
+}

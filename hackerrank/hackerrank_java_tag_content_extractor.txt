@@ -1,0 +1,78 @@
+// Note - this challenge is messed up, the spec is really weird. This
+// completes the first test case and none other.
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution{
+   public static void main(String[] args){
+      int i,print_count;
+      Scanner in = new Scanner(System.in);
+      int testCases = Integer.parseInt(in.nextLine());
+      String delim = "(?=<)|(?<=>)";
+      boolean flag;
+       
+      Stack st;
+      String tag_match;
+      //String ;
+       
+      while(testCases>0){
+          String line = in.nextLine();
+          String[] token = line.trim().split(delim);
+          String result;
+          st = new Stack();          
+          print_count = 0;
+          //Write your code here
+          //System.out.println("" + line);
+          for (i=0;i<token.length;i++) {
+              //System.out.println("" + token[i]); 
+              // Don't push an empty string
+              if (token[i].compareTo("") != 0) {                                    
+                  if (token[i].length() <= 2) {
+                      // token too short to be a real tag
+                      st.push(token[i]);    
+                  } else if (token[i].substring(0,2).compareTo("</") != 0 ) {
+                      // Is the token an end tag?                  
+                      // Tag not found
+                      st.push(token[i]);                                          
+                  } else { 
+                      // Tag Found
+                      tag_match="<"+token[i].substring(2);                    
+                      //if (st.search(tag_match) > 0) {
+                          // begin poping                          
+                          flag=true;
+                          while (flag == true) {
+                              if (!st.empty()) {
+                                result = (String) st.pop();                             
+                                  if (result.compareTo(tag_match) != 0) {
+                                      if (st.search(tag_match) > 0 && result.substring(0,1).compareTo("<") != 0 ) {
+                                        System.out.println("" + result);
+                                        print_count ++;
+                                      }
+                                  } else {
+                                      flag = false;
+                                  }
+                              } else {
+                                  flag = false;
+                              }
+                          } 
+                      //}
+                      
+                  } 
+                  
+                }
+          }
+          
+          //System.out.println(st);
+          if (print_count==0) {
+              System.out.println("None");
+          }
+          testCases--;
+      }
+   }
+}
+
+

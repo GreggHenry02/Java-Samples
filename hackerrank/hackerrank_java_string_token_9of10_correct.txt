@@ -1,0 +1,27 @@
+    import java.io.*;
+    import java.util.*;
+
+
+
+    public class Solution {
+
+      
+        public static void main(String[] args) 
+        {
+
+      
+          Scanner scan = new Scanner(System.in);
+          String s=scan.nextLine();
+        //Complete the code
+            //s = "Sample    breaks\\new line'cat_under@atsign!exc,comma?question.period";
+            //[A-Za-z !,?.\_'@]+
+            String delims = "[ '\\\\\\.,?!\\_@]+";
+            // trim is needed in multiple test cases.
+            // No trim, test 9 succeeds, with trim test 9 fails
+            //String[] tokens = s.trim().split(delims);
+            String[] tokens = s.replaceAll("\\s+"," ").trim().split(delims);
+            System.out.println("" + tokens.length);            
+            for (int i=0;i<tokens.length;i++)
+                System.out.println("" + tokens[i]);
+        }
+    }

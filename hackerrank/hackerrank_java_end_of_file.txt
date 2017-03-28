@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+//import java.util.ArrayList;
+//import java.util.Collections;
+//import java.util.List;
+//import java.util.Arrays;
+
+public class Solution {
+
+    InputStreamReader in = new InputStreamReader(System.in);
+    BufferedReader input = new BufferedReader(in);
+    
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Solution solution = new Solution();
+    }
+    
+    Solution() {
+        String input_line = new String();
+        String str = new String("");
+        Scanner scanner;
+        List<String> list = new LinkedList<String>();
+
+        try {
+            while ( (str = input.readLine()) != null && str.length() != 0) {         
+                list.add(str);
+            }
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+        for (int i=0;i<list.size();i++) {            
+            System.out.println(i+1 + " " + list.get(i));    
+        }                
+    }
+       
+}

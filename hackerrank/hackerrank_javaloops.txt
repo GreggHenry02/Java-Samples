@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    InputStreamReader in = new InputStreamReader(System.in);
+    BufferedReader input = new BufferedReader(in);
+    
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */      
+        Solution solution = new Solution();
+    }
+    
+    Solution() {
+        processInput();
+    }
+    
+    private void processInput() {
+        String input_line = new String();    
+        int test_cases = Integer.parseInt( readNextLine() );        
+        Scanner scanner; 
+        List<Integer> list;
+        
+        for (int i=1;i<=test_cases;i++) {
+            input_line=readNextLine();            
+            
+            scanner = new Scanner(input_line);
+            list = new ArrayList<Integer>();
+            while (scanner.hasNextInt()) {
+                list.add(scanner.nextInt());
+            }
+            writeLine(list.get(0), list.get(1), list.get(2) );
+        }   
+    // End of processInput
+    }
+        
+    private void writeLine(int a, int b, int n) {                
+        int value=a, step = 1;
+        for (int i=1;i<=n;i++) {
+            value += step * b;
+            step *= 2;
+            System.out.print(value + " ");
+        }
+        System.out.print("\n");
+        
+    }
+        
+    private String readNextLine() {
+        String str = new String();
+        try {
+            str = input.readLine();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }        
+        return str;        
+    }
+}
