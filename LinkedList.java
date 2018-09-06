@@ -1,5 +1,5 @@
 /*
- An army is always fighting it's last battle.
+ List of TODO items for this class.
  Linked List class
  Constructor
  Destructor
@@ -18,6 +18,6 @@
  */
 public class LinkedList {
     public static void main(String[] args) {
-        System.out.println("'Sup, Bitches");
+        System.out.println("Test Message");
     }
 }
